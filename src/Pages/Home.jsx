@@ -4,91 +4,110 @@ import { Link } from "react-router-dom";
 const Home = () => {
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-400 to-purple-600">
-      {/* Header Section */}
+      {/* Hero Section */}
       <div
-        className="relative bg-cover bg-center h-[75vh] flex items-center justify-center text-center text-white px-6 sm:px-8 lg:px-16"
-        style={{
-          backgroundImage: 'url("/images/backrou.jpeg")'
-        }}
+        className="relative bg-cover bg-center h-[100vh] flex items-center justify-center text-center text-white px-6 sm:px-8 lg:px-16"
+        style={{ backgroundImage: 'url("/images/background.jpeg")' }}
       >
-        <div className="absolute inset-0 bg-black opacity-50"></div>
+        <div className="absolute inset-0"></div>
         <div className="relative z-10">
-          <h1 className="text-6xl font-bold tracking-wide text-shadow-lg">
-            Welcome to Pet Haven 🐾
+          <h1 className="text-5xl md:text-6xl font-bold text-shadow-lg">
+            Find Your New Best Friend 🐾
           </h1>
-          <p className="text-2xl mt-6">Adopt, Love, and Care for a Furry Friend</p>
+          <p className="text-xl sm:text-2xl mt-6">
+            Ensure you are fully prepared to provide proper care and attention to your pet before welcoming them into your home.
+          </p>
+          <Link
+            to="/petlist"
+            aria-label="Start adoption journey"
+            className="mt-8 inline-block bg-yellow-400 text-black py-3 px-6 rounded-lg hover:bg-yellow-500 transition duration-300"
+          >
+            Start Your Adoption Journey
+          </Link>
         </div>
       </div>
 
-      {/* Mission Section */}
-      <section className="text-center py-12 bg-gray-100">
-        <h2 className="text-4xl font-semibold text-gray-800 mb-6">Our Mission</h2>
-        <p className="text-xl text-gray-700 mx-auto sm:w-2/3 md:w-1/2">
-          At Pet Haven, we believe that every pet deserves a loving and caring home. Our mission is to match you with your perfect companion. Start your adoption journey today!
-        </p>
+      {/* Pet Categories */}
+      <section className="py-12 bg-gray-100 text-center">
+        <h2 className="text-4xl font-semibold text-gray-800 mb-6">Our Pets</h2>
+        <div className="flex flex-wrap justify-center gap-8">
+          {[
+            { name: "Dogs", img: "/images/dogy.jpg", desc: "Loyal, loving companions. Adopt a dog today!" },
+            { name: "Cats", img: "/images/caty.jpg", desc: "Independent, playful, and affectionate." },
+            { name: "Rabbits", img: "/images/rabbit.jpg", desc: "Cute, cuddly companions for small spaces." },
+            { name: "Birds", img: "/images/birdy.jpg", desc: "Interactive, colorful, and make great pets!" },
+          ].map((pet) => (
+            <div key={pet.name} className="w-64 bg-white shadow-lg rounded-lg overflow-hidden">
+              <img src={pet.img} alt={pet.name} loading="lazy" className="w-full h-48 object-cover" />
+              <div className="p-4">
+                <h3 className="font-bold text-xl text-gray-800">{pet.name}</h3>
+                <p className="text-gray-600 mt-2">{pet.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </section>
 
-      {/* Animal Sections */}
-      <div className="flex justify-center items-center flex-wrap min-h-screen bg-gray-50 py-12">
-        {/* Dog Section */}
-        <div className="flex flex-col items-center mb-8 mx-4 bg-white shadow-lg rounded-lg overflow-hidden">
-          <img src="/images/doog.jpeg" alt="Dog" className="w-48 h-48 object-cover rounded-full mt-4" />
-          <div className="p-4">
-            <h2 className="font-bold text-xl text-gray-800">DOGS</h2>
-            <ul className="list-disc pl-5 mt-4 text-gray-600">
-              <li>Loyal, affectionate, great companions</li>
-              <li>Require time, attention & exercise</li>
-              <li>Need resources & care</li>
-            </ul>
-          </div>
+      {/* How it Works Section */}
+      <section className="py-12 bg-gray-200 text-center">
+        <h2 className="text-4xl font-semibold text-gray-800 mb-6">How It Works</h2>
+        <div className="flex flex-wrap justify-center gap-8 sm:gap-16">
+          {[
+            { title: "Step 1: Choose Your Pet", desc: "Browse our catalog and choose a pet that fits your needs." },
+            { title: "Step 2: Apply for Adoption", desc: "Fill out a simple application form to adopt your chosen pet." },
+            { title: "Step 3: Meet Your Pet", desc: "Once approved, meet your new best friend!" },
+          ].map((step) => (
+            <div key={step.title} className="w-72 bg-white shadow-lg rounded-lg p-6">
+              <h3 className="text-xl font-semibold text-gray-800">{step.title}</h3>
+              <p className="text-gray-600 mt-4">{step.desc}</p>
+            </div>
+          ))}
         </div>
+      </section>
 
-        {/* Cat Section */}
-        <div className="flex flex-col items-center mb-8 mx-4 bg-white shadow-lg rounded-lg overflow-hidden">
-          <img src="/images/catyy.jpeg" alt="Cat" className="w-48 h-48 object-cover rounded-full mt-4" />
-          <div className="p-4">
-            <h2 className="font-bold text-xl text-gray-800">CATS</h2>
-            <ul className="list-disc pl-5 mt-4 text-gray-600">
-              <li>Independent, low-maintenance</li>
-              <li>Produce fewer allergens than dogs</li>
-              <li>Great for people with less time</li>
-            </ul>
-          </div>
-        </div>
 
-        {/* Rabbit Section */}
-        <div className="flex flex-col items-center mb-8 mx-4 bg-white shadow-lg rounded-lg overflow-hidden">
-          <img src="/images/rabbit3.jpeg" alt="Rabbit" className="w-48 h-48 object-cover rounded-full mt-4" />
-          <div className="p-4">
-            <h2 className="font-bold text-xl text-gray-800">RABBITS</h2>
-            <ul className="list-disc pl-5 mt-4 text-gray-600">
-              <li>Great for small spaces</li>
-              <li>Low maintenance but still need care</li>
-              <li>Adorable & cuddly companions</li>
-            </ul>
-          </div>
+       <section className="text-center py-12  bg-gray-200 text-white flex flex-col items-center">
+         <h1 className="text-4xl font-semibold mb-6 text-black">Ready to Adopt a Pet?</h1>
+  
+       {/* First Form */}
+       <div className="mb-8" >
+         <h1 className="text-2xl font-semibold text-orange-500">The Joy of Pet Adoptoin </h1>
+         <p className="text-xl text-gray-200 max-w-3xl text-center">Bringing a pet into your life can be an incredibly rewarding experience , not just for you but for the furry friend you welcome into your home. There's a speciel kind of magic that comes with adopting any companion animal.</p>
+       </div>
+  
+       {/* Second Form */}
+       <div className="mb-8">
+         <h1 className="text-2xl font-semibold text-orange-500">A Guide to pet Adoption</h1>
+         <p className="text-xl text-gray-200 max-w-3xl text-center">Are you considering adding a new pet to your family? Pet adoption is a wonderful option to consider. The journey of finding the ideal companion involves careful thought, research , and planning, but the rewards are immesurable.</p>
         </div>
-
-        {/* Bird Section */}
-        <div className="flex flex-col items-center mb-8 mx-4 bg-white shadow-lg rounded-lg overflow-hidden">
-          <img src="/images/perro.jpg" alt="Bird" className="w-48 h-48 object-cover rounded-full mt-4" />
-          <div className="p-4">
-            <h2 className="font-bold text-xl text-gray-800">BIRDS</h2>
-            <ul className="list-disc pl-5 mt-4 text-gray-600">
-              <li>Interactive, make great pets</li>
-              <li>Can be noisy, but fun</li>
-              <li>Require attention & space</li>
-            </ul>
-          </div>
-        </div>
-      </div>
+  
+       {/* Third Form */}
+       <div className="mb-8">
+         <h1 className="text-2xl font-semibold text-orange-500">Healing Power Of Animal</h1>
+         <p className="text-xl">Animals have an extraordinary ability to touch our lives in profound ways, offering not only companionshipbut also a therapeutic bond that can positively impact our physical, mental, and emotional well-being</p>
+       </div>
+  
+       {/* Optional Button or CTA */}
+       <div className="mt-6">
+        <Link
+         to="/petlist"
+         aria-label="Start adoption journey"
+         className="inline-block bg-orange-500 text-black py-3 px-8 rounded-lg hover:bg-yellow-500 transition duration-300"
+        >
+          Start Your Adoption Journey
+        </Link>
+       </div>
+       </section>
 
       {/* Footer Section */}
-      <footer className="bg-black text-white py-8 text-center">
-        <p>&copy; 2025 Pet Haven. All rights reserved.</p>
-        <div className="mt-4">
-          <Link to="/about" className="mx-4 hover:text-blue-500">About Us</Link>
-          <Link to="/contact" className="mx-4 hover:text-blue-500">Contact Us</Link>
+      <footer className=" text-white py-12 px-6  bg-orange-950 p-4 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto text-center">
+          <p className="text-lg mb-6">&copy; 2025 Pet Haven. All rights reserved.</p>
+          <div className="mb-6">
+            <Link to="/about" className="mx-4 hover:text-yellow-400">About Us</Link>
+            <Link to="/contact" className="mx-4 hover:text-yellow-400">Contact Us</Link>
+          </div>
+          
         </div>
       </footer>
     </div>

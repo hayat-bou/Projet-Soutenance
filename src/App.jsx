@@ -6,13 +6,14 @@ import PetProducts from './Pages/PetProducts' ;
 import PetProfile from './Pages/PetProfile';
 import About from './Pages/About';
 import ContactUs from './Pages/ContactUs';
-import Form from './Components/Form';
+import Admin from './Components/Admin';
+import FormData from './Components/FormData';
 
 
 function App() {
   return (
     <>
-      <nav className="bg-orange-900 p-4 flex items-center justify-between">
+      <nav className= "  bg-orange-950 p-4 flex items-center justify-between">
         <div className='flex items-center'>
           <img src='/public/images/logo.png'  className="w-10 h-10 object-cover rounded-full alt= "Logo/>
           <h1 className='text-white text-2xl ml-1'>AdoptOne</h1>
@@ -23,7 +24,7 @@ function App() {
           <li><Link to="/petproducts" className="text-white hover:text-gray-300">PetProducts</Link></li>
           <li><Link to="/about" className="text-white hover:text-gray-300">About</Link></li>
           <li><Link to="/contactus" className="text-white hover:text-gray-300">ContactUs</Link></li>
-          <li><Link to="/form" className="text-white hover:text-gray-300">Form</Link></li>
+          <li><Link to="/admin" className="text-white hover:text-gray-300">Admin</Link></li>
         </ul>
       </nav>
 
@@ -34,7 +35,8 @@ function App() {
         <Route path="/petproducts" element={<PetProducts />} />
         <Route path="/about" element={<About />} />
         <Route path="/contactus" element={<ContactUs />} />
-        <Route path="/form" element={<Form />} />
+        <Route path="/admin" element={<Admin />} />
+        <Route path='/FormData'  element={<FormData />} />
       </Routes>
     </>
   );
