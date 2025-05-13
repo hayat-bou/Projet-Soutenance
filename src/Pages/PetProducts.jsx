@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { FaShoppingCart, FaSearch } from 'react-icons/fa';  // Importing icons from react-icons
+import { FaShoppingCart, FaSearch } from 'react-icons/fa';
 
 const PetProducts = () => {
   const [products, setProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Fetch the products when the component mounts
   useEffect(() => {
-    fetch('http://localhost:3001/pets')  // Your API endpoint
+    fetch('http://localhost:3001/pets')  
       .then(response => response.json())
       .then(data => setProducts(data))
       .catch(error => console.error('Error fetching products:', error));
@@ -26,9 +25,9 @@ const PetProducts = () => {
     <div className="bg-gray-50 min-h-screen py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Hero Section with Background */}
-        <div className="relative bg-cover bg-center h-100 rounded-lg shadow-md mb-12" style={{ backgroundImage: 'url("/images/backgroundd.jpg")' }}>
+        <div className="relative bg-cover bg-center h-90 rounded-lg shadow-md mb-12" style={{ backgroundImage: 'url("/images/backgroundd.jpg")' }}>
           <div className="absolute inset-0"></div>
-          <div className="relative z-10 text-center text-black py-14">
+          <div className="relative z-10 text-center text-black py-8">
             <h2 className="text-4xl font-semibold">Find the Best Products for Your Pet</h2>
             <p className="mt-4 text-xl">From food to toys and accessories, we have everything your pet needs!</p>
           </div>
@@ -36,7 +35,7 @@ const PetProducts = () => {
 
         {/* Search Bar */}
         <div className="flex justify-center mb-8">
-          <div className="relative w-full sm:w-1/2">
+          <div className="relative w-full sm:w-1/2 lg:w-1/3">
             <input
               type="text"
               value={searchQuery}

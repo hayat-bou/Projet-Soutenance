@@ -5,11 +5,14 @@ const About = () => {
     <div className="container mx-auto px-6 py-8">
 
       {/* Hero Section */}
-      <section
-   
-      >
-        <div className="text-center text-white bg-black/50 py-16 rounded-lg">
-          <h1 className="text-6xl font-extrabold text-shadow-lg">
+        <div className="text-center text-white py-2 rounded-lg" >
+        <div
+            className=" bg-cover bg-center h-120 "
+            style={{
+            backgroundImage: 'url("/images/backg.jpeg")', 
+           }}
+          />
+          <h1 className="text-6xl text-black font-extrabold text-shadow-lg">
             Welcome to The Happy Paws Shelter 🐾
           </h1>
           <p className="text-xl mt-4 max-w-2xl mx-auto">
@@ -17,11 +20,11 @@ const About = () => {
             Discover how we help pets find their forever homes.
           </p>
         </div>
-      </section>
+      
 
       {/* Our Mission Section */}
-      <section className="my-12">
-        <h2 className="text-4xl font-semibold text-gray-800 text-center mb-6">
+      <section className="my-2">
+        <h2 className="text-4xl font-semibold text-gray-800 text-center mb-2">
           Our Mission
         </h2>
         <p className="text-lg text-gray-700 max-w-3xl mx-auto text-center">
@@ -38,7 +41,7 @@ const About = () => {
           What We Do
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-          <div className="bg-gradient-to-r from-red-500 to-red-400 text-white p-8 rounded-lg shadow-lg hover:scale-105 transform transition duration-300 ease-in-out">
+          <div className="bg-orange-600  text-white p-8 rounded-lg shadow-lg hover:scale-105 transform transition duration-300 ease-in-out">
             <h3 className="text-2xl font-semibold">Rescue & Rehabilitation</h3>
             <p className="mt-4 text-lg">
               We rescue animals from challenging situations and provide medical care, food, shelter,
@@ -46,7 +49,7 @@ const About = () => {
             </p>
           </div>
 
-          <div className="bg-gradient-to-r from-purple-500 to-purple-400 text-white p-8 rounded-lg shadow-lg hover:scale-105 transform transition duration-300 ease-in-out">
+          <div className="bg-orange-600  text-white p-8 rounded-lg shadow-lg hover:scale-105 transform transition duration-300 ease-in-out">
             <h3 className="text-2xl font-semibold">Adoption Services</h3>
             <p className="mt-4 text-lg">
               We carefully match our animals with families who are ready to adopt and provide them
@@ -96,10 +99,24 @@ const About = () => {
               Milo was rescued from the streets and now enjoys a cozy spot by the window, with a loving owner who spoils him.
             </p>
           </div>
+          <div className="bg-white shadow-lg rounded-lg p-6">
+            <img src="/images/rabbit2.jpeg" alt="Success Story" className="w-full h-48 object-cover rounded-lg mb-4" />
+            <h3 className="text-xl font-semibold">Rabbits' Safe Haven</h3>
+            <p className="text-gray-600">
+              These two rabbits were rescued from an overcrowded shelter. They now live happily in a spacious garden, hopping around freely.
+            </p>
+           </div>
+
+           <div className="bg-white shadow-lg rounded-lg p-6">
+            <img src="/images/doood.jpeg" alt="Success Story" className="w-full h-48 object-cover rounded-lg mb-4" />
+            <h3 className="text-xl font-semibold">Buddy the Dog's Happy Life</h3>
+            <p className="text-gray-600">
+              Buddy was abandoned on the streets but is now loved and cared for by his forever family. He enjoys daily walks and playful adventures.
+            </p>
+           </div>
         </div>
       </section>
 
-      {/* Get Involved Section */}
       <section className="my-12">
         <h2 className="text-4xl font-semibold text-gray-800 text-center mb-6">
           How You Can Help
