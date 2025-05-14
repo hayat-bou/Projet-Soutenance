@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { FaShoppingCart, FaSearch } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 const PetProducts = () => {
   const [products, setProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch('http://localhost:3001/pets')  
@@ -16,6 +18,20 @@ const PetProducts = () => {
     setSearchQuery(e.target.value);
   };
 
+  const handleAddToCart = (product) => {
+
+     // Get the current favorites from localStorage, or initialize it if it's empty
+    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    // Add the new product to the favorites list
+    const updatedFavorites = [...favorites, product];
+
+    localStorage.setItem('favorites', JSON.stringify(updatedFavorites)) 
+
+    navigate('/favorites')
+
+  };
+
   const filteredProducts = products.filter(product =>
     product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     (product.description && product.description.toLowerCase().includes(searchQuery.toLowerCase()))
@@ -25,7 +41,7 @@ const PetProducts = () => {
     <div className="bg-gray-50 min-h-screen py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Hero Section with Background */}
-        <div className="relative bg-cover bg-center h-90 rounded-lg shadow-md mb-12" style={{ backgroundImage: 'url("/images/backgroundd.jpg")' }}>
+        <div className="relative bg-cover bg-center h-90 rounded-lg shadow-md mb-12" style={{ backgroundImage: 'url("/images/backgs.webp")' }}>
           <div className="absolute inset-0"></div>
           <div className="relative z-10 text-center text-black py-8">
             <h2 className="text-4xl font-semibold">Find the Best Products for Your Pet</h2>
@@ -64,7 +80,10 @@ const PetProducts = () => {
                   <p className="text-gray-600 mt-2">{product.description || "No description available"}</p>
                   <div className="flex justify-between items-center mt-4">
                     <span className="text-lg font-bold text-blue-600">{product.price}</span>
-                    <button className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-200 flex items-center">
+                    <button 
+                       onClick={() => handleAddToCart(product)}
+                       className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-200 flex items-center"
+                    >
                       <FaShoppingCart className="mr-2" /> Add to Cart
                     </button>
                   </div>

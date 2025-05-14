@@ -9,7 +9,8 @@ import ContactUs from './Pages/ContactUs';
 import Admin from './Components/Admin';
 import FormData from './Components/FormData';
 import AdoptForm from './Pages/AdoptForm';
-import Cart from './Pages/Cart';
+import Favorites from './Pages/favorites';
+
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -134,7 +135,7 @@ function App() {
         <Route path="/formdata" element={<FormData />} />
         <Route path="/adoptform/:id" element={<AdoptForm />} />
         <Route path="/petproducts/:id" element={<PetProducts />} />
-        <Route path="/cart" element={<Cart />} />
+        <Route path="/favorites" element={<Favorites />} />
       </Routes>
     </>
   );

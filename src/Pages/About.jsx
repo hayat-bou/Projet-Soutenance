@@ -9,7 +9,7 @@ const About = () => {
         <div
             className=" bg-cover bg-center h-120 "
             style={{
-            backgroundImage: 'url("/images/backg.jpeg")', 
+            backgroundImage: 'url("/images/backgroundd.jpg")', 
            }}
           />
           <h1 className="text-6xl text-black font-extrabold text-shadow-lg">

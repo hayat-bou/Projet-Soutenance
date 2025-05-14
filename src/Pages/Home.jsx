@@ -8,7 +8,7 @@ const Home = () => {
       {/* Hero Section */}
       <div
         className="relative bg-cover bg-center h-[100vh] flex items-center justify-center text-center text-white px-6 sm:px-8 lg:px-16"
-        style={{ backgroundImage: 'url("/images/background.jpeg")' }}
+        style={{ backgroundImage: 'url("/images/backgok.jpeg")' }}
       >
         <div className="absolute inset-0"></div>
         <div className="relative z-10">
