@@ -10,6 +10,7 @@ import Admin from './Components/Admin';
 import FormData from './Components/FormData';
 import AdoptForm from './Pages/AdoptForm';
 import Favorites from './Pages/favorites';
+import NotFound from './Pages/notFound' ;
 
 
 function App() {
@@ -19,20 +20,20 @@ function App() {
 
   return (
     <>
-      <nav className="bg-orange-950 p-4">
+      <nav className="bg-gray-100 p-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
             <img
-              src="/public/images/logo.png"
+              src="/public/images/pat.png"
               className="w-10 h-10 object-cover rounded-full"
               alt="Logo"
             />
-            <h1 className="text-white text-2xl ml-1">AdoptOne</h1>
+            <h1 className="text-black text-2xl ml-1">AdoptOne</h1>
           </div>
 
           {/* Hamburger Icon for Mobile */}
           <button
-            className="lg:hidden text-white"
+            className="lg:hidden text-black"
             onClick={toggleMenu}
           >
             <svg
@@ -54,32 +55,32 @@ function App() {
           {/* Menu for Desktop */}
           <ul className="hidden lg:flex space-x-6 justify-center">
             <li>
-              <Link to="/" className="text-white hover:text-gray-300">
+              <Link to="/" className="text-black hover:text-gray-300">
                 Home
               </Link>
             </li>
             <li>
-              <Link to="/petlist" className="text-white hover:text-gray-300">
+              <Link to="/petlist" className="text-black hover:text-gray-300">
                 PetList
               </Link>
             </li>
             <li>
-              <Link to="/petproducts" className="text-white hover:text-gray-300">
+              <Link to="/petproducts" className="text-black hover:text-gray-300">
                 PetProducts
               </Link>
             </li>
             <li>
-              <Link to="/about" className="text-white hover:text-gray-300">
+              <Link to="/about" className="text-black hover:text-gray-300">
                 About
               </Link>
             </li>
             <li>
-              <Link to="/contactus" className="text-white hover:text-gray-300">
+              <Link to="/contactus" className="text-black hover:text-gray-300">
                 ContactUs
               </Link>
             </li>
             <li>
-              <Link to="/admin" className="text-white hover:text-gray-300">
+              <Link to="/admin" className="text-black hover:text-gray-300">
                 Admin
               </Link>
             </li>
@@ -90,32 +91,32 @@ function App() {
         <div className={`lg:hidden ${isMenuOpen ? 'block' : 'hidden'}`}>
           <ul className="space-y-4 text-center">
             <li>
-              <Link to="/" className="text-white hover:text-gray-300 block py-2">
+              <Link to="/" className="text-black hover:text-gray-300 block py-2">
                 Home
               </Link>
             </li>
             <li>
-              <Link to="/petlist" className="text-white hover:text-gray-300 block py-2">
+              <Link to="/petlist" className="text-black hover:text-gray-300 block py-2">
                 PetList
               </Link>
             </li>
             <li>
-              <Link to="/petproducts" className="text-white hover:text-gray-300 block py-2">
+              <Link to="/petproducts" className="text-black hover:text-gray-300 block py-2">
                 PetProducts
               </Link>
             </li>
             <li>
-              <Link to="/about" className="text-white hover:text-gray-300 block py-2">
+              <Link to="/about" className="text-black hover:text-gray-300 block py-2">
                 About
               </Link>
             </li>
             <li>
-              <Link to="/contactus" className="text-white hover:text-gray-300 block py-2">
+              <Link to="/contactus" className="text-black hover:text-gray-300 block py-2">
                 ContactUs
               </Link>
             </li>
             <li>
-              <Link to="/admin" className="text-white hover:text-gray-300 block py-2">
+              <Link to="/admin" className="text-black hover:text-gray-300 block py-2">
                 Admin
               </Link>
             </li>
@@ -136,6 +137,7 @@ function App() {
         <Route path="/adoptform/:id" element={<AdoptForm />} />
         <Route path="/petproducts/:id" element={<PetProducts />} />
         <Route path="/favorites" element={<Favorites />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );

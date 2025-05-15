@@ -8,7 +8,7 @@
       "name": "cat food",
       "species": "cat",
       "price": "8DH",
-      "image": "/public/produits/pdt1.jpeg"
+      "image": "produits/pdt1.jpeg"
     },
     {
       "id": "04f6",
@@ -18,7 +18,7 @@
       "name": "Royal Canin",
       "species": "cat",
       "price": "26DH",
-      "image": "/produits/pdt5.jpeg"
+      "image": "produits/pdt5.jpeg"
     },
     {
       "id": "fc4a",
@@ -28,7 +28,7 @@
       "name": "Miglior Gatto",
       "species": "cat",
       "price": "12DH",
-      "image": "/produits/pdt6.jpeg"
+      "image": "produits/pdt6.jpeg"
     },
     {
       "id": "633d",
@@ -228,7 +228,7 @@
       "name": "Toy",
       "species": "Dog",
       "price": "18DH",
-      "image": "/public/produits/pdt58.jpeg"
+      "image": "produits/pdt58.jpeg"
     },
     {
       "id": "de47",

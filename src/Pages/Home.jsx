@@ -7,12 +7,12 @@ const Home = () => {
       
       {/* Hero Section */}
       <div
-        className="relative bg-cover bg-center h-[100vh] flex items-center justify-center text-center text-white px-6 sm:px-8 lg:px-16"
-        style={{ backgroundImage: 'url("/images/backgok.jpeg")' }}
+        className="relative bg-cover bg-center h-[110vh] flex items-center justify-center text-center text-black px-2 sm:px-8 lg:px-16"
+        style={{ backgroundImage: 'url("/images/baaak.avif")' }}
       >
         <div className="absolute inset-0"></div>
         <div className="relative z-10">
-          <h1 className="text-5xl md:text-6xl font-bold text-shadow-lg">
+          <h1 className="text-5xl md:text-6xl font-bold text-shadow-lg ">
             Find Your New Best Friend 🐾
           </h1>
           <p className="text-xl sm:text-2xl mt-6 max-w-3xl mx-auto">
@@ -70,8 +70,10 @@ const Home = () => {
       <section className="text-center py-12 bg-gray-200 text-white flex flex-col items-center">
         <h1 className="text-4xl font-semibold mb-6 text-black">Ready to Adopt a Pet?</h1>
 
+      <div className="flex flex-wrap justify-center">
+
         {/* First Form */}
-        <div className="mb-8">
+        <div className="w-1/3">
           <h1 className="text-2xl font-semibold text-orange-500">The Joy of Pet Adoption</h1>
           <p className="text-xl text-black max-w-3xl text-center mx-auto">
             Bringing a pet into your life can be an incredibly rewarding experience, not just for you but for the furry friend you welcome into your home. There's a special kind of magic that comes with adopting any companion animal.
@@ -79,7 +81,7 @@ const Home = () => {
         </div>
 
         {/* Second Form */}
-        <div className="mb-8">
+        <div className="w-1/3">
           <h1 className="text-2xl font-semibold text-orange-500">A Guide to Pet Adoption</h1>
           <p className="text-xl text-black max-w-3xl text-center mx-auto">
             Are you considering adding a new pet to your family? Pet adoption is a wonderful option to consider. The journey of finding the ideal companion involves careful thought, research, and planning, but the rewards are immeasurable.
@@ -87,11 +89,12 @@ const Home = () => {
         </div>
 
         {/* Third Form */}
-        <div className="mb-8">
+        <div className="w-1/3">
           <h1 className="text-2xl font-semibold text-orange-500">The Healing Power of Animals</h1>
           <p className="text-xl text-black max-w-3xl text-center mx-auto">
             Animals have an extraordinary ability to touch our lives in profound ways, offering not only companionship but also a therapeutic bond that can positively impact our physical, mental, and emotional well-being.
           </p>
+        </div>
         </div>
 
         {/* Call to Action Button */}
@@ -108,7 +111,15 @@ const Home = () => {
 
       {/* Footer Section */}
       <footer className="text-white py-12 px-6 bg-orange-950">
-        <div className="max-w-7xl mx-auto text-center">
+        <div className="max-w-7xl mx-auto text-center flex flex-col items-center space-y-6">
+        <div className="flex items-center space-x-3">
+      <img
+        src="/images/dog.png"
+        alt="AdoptOne Logo"
+        className="w-10 h-10 object-contain"
+      />
+      <span className="text-2xl font-bold text-white">AdoptOne</span>
+    </div>
           <p className="text-lg mb-6">&copy; 2025 Pet Haven. All rights reserved.</p>
           <div className="mb-6">
             <Link to="/about" className="mx-4 hover:text-yellow-400">About Us</Link>
