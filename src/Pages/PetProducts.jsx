@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaShoppingCart, FaSearch } from 'react-icons/fa';
+import { FaShoppingCart, FaSearch, FaPlus, FaMinus, FaArrowRight } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 const PetProducts = () => {
@@ -7,14 +7,32 @@ const PetProducts = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [cart, setCart] = useState([]);
   const [quantities, setQuantities] = useState({});
-  const [notificationId, setNotificationId] = useState(null);
+  const [notification, setNotification] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:3001/pets')
-      .then(response => response.json())
-      .then(data => setProducts(data))
-      .catch(error => console.error('Error fetching products:', error));
+    const fetchProducts = async () => {
+      try {
+        setIsLoading(true);
+        const response = await fetch('http://localhost:5000/pets');
+        const data = await response.json();
+        setProducts(data);
+        
+        // Initialize quantities
+        const initialQuantities = {};
+        data.forEach(product => {
+          initialQuantities[product.id] = 0;
+        });
+        setQuantities(initialQuantities);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchProducts();
 
     const storedCart = JSON.parse(localStorage.getItem('favorites')) || [];
     setCart(storedCart);
@@ -35,17 +53,27 @@ const PetProducts = () => {
     const quantity = quantities[product.id] || 0;
     if (quantity === 0) return;
 
-    let updatedCart = [...cart];
-    const index = updatedCart.findIndex(item => item.id === product.id);
-    if (index !== -1) {
-      updatedCart[index].quantity += quantity;
+    const updatedCart = [...cart];
+    const existingItemIndex = updatedCart.findIndex(item => item.id === product.id);
+
+    if (existingItemIndex !== -1) {
+      updatedCart[existingItemIndex].quantity += quantity;
     } else {
       updatedCart.push({ ...product, quantity });
     }
+
     localStorage.setItem('favorites', JSON.stringify(updatedCart));
     setCart(updatedCart);
-    setNotificationId(product.id);
-    setTimeout(() => setNotificationId(null), 3000);
+    
+    // Show notification
+    setNotification({
+      id: product.id,
+      name: product.name,
+      quantity: quantity
+    });
+    
+    // Hide notification after 3 seconds
+    setTimeout(() => setNotification(null), 3000);
   };
 
   const filteredProducts = products.filter(product =>
@@ -53,81 +81,162 @@ const PetProducts = () => {
     (product.description && product.description.toLowerCase().includes(searchQuery.toLowerCase()))
   );
 
-  return (
-    <div className="bg-gray-50 min-h-screen py-4">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative bg-cover bg-center h-90 rounded-lg shadow-md mb-2" style={{ backgroundImage: 'url("/images/backgs.webp")' }}>
-          <div className="absolute inset-0"></div>
-          <div className="relative z-10 text-center text-white py-8">
-            <h2 className="text-4xl font-semibold">Find the Best Products for Your Pet</h2>
-            <p className="mt-4 text-xl">From food to toys and accessories, we have everything your pet needs!</p>
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            {[...Array(8)].map((_, index) => (
+              <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden animate-pulse">
+                <div className="h-64 bg-gray-200"></div>
+                <div className="p-4 space-y-4">
+                  <div className="h-6 bg-gray-200 rounded w-3/4"></div>
+                  <div className="h-4 bg-gray-200 rounded w-full"></div>
+                  <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                  <div className="h-10 bg-gray-200 rounded"></div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
+      </div>
+    );
+  }
 
-        <div className="flex justify-center mt-10">
-          <div className="relative w-full sm:w-1/2 lg:w-1/3">
+  return (
+    <div className="bg-gray-50 min-h-screen py-8">
+      {/* Hero Banner */}
+      <div className="relative bg-cover bg-center h-64 rounded-xl shadow-lg mb-12 mx-4 sm:mx-6 lg:mx-8" 
+           style={{ backgroundImage: 'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("/images/backgs.webp")' }}>
+        <div className="absolute inset-0 flex items-center justify-center text-center px-4">
+          <div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
+              Premium Products for Your Pets
+            </h2>
+            <p className="text-lg sm:text-xl text-white max-w-2xl mx-auto">
+              Everything you need to keep your furry friends happy and healthy
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Search and Cart Button */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
+          <div className="relative w-full sm:w-96">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <FaSearch className="text-gray-400" />
+            </div>
             <input
               type="text"
               value={searchQuery}
               onChange={handleSearchChange}
-              placeholder="Search for pet products..."
-              className="w-full p-4 pl-10 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Search products..."
+              className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
             />
-            <div className="absolute top-3 left-3 text-gray-500">
-              <FaSearch className="text-lg" />
-            </div>
           </div>
-        </div>
-        <div className='flex justify-end mb-6'>
+          
           <button
-            onClick={() => navigate ('/favorites')}
-            className='bg-green-600 text-white py-2 px-6 rounded-lg hover:bg-green-700 transition duration-200'
+            onClick={() => navigate('/favorites')}
+            className="flex items-center justify-center w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-green-600 to-green-500 text-white rounded-lg hover:from-green-700 hover:to-green-600 transition-all shadow-md"
           >
-            voir le panier
+            <FaShoppingCart className="mr-2" />
+            View Cart ({cart.reduce((total, item) => total + item.quantity, 0)})
+            <FaArrowRight className="ml-2" />
           </button>
-
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        {/* Products Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {filteredProducts.length > 0 ? (
             filteredProducts.map(product => (
-              <div key={product.id} className="bg-white shadow-lg rounded-lg overflow-hidden transform transition duration-300 hover:scale-105">
-                <img
-                  src={product.image || "/images/default-product.jpg"}
-                  alt={product.name}
-                  className="w-full h-64 object-cover"
-                />
+              <div 
+                key={product.id} 
+                className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300"
+              >
+                <div className="relative h-64 overflow-hidden">
+                  <img
+                    src={product.image || "/images/default-product.jpg"}
+                    alt={product.name}
+                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                  />
+                </div>
                 
-                <div className="p-4">
-                  <h3 className="text-xl font-semibold text-gray-800">{product.name}</h3>
-                  <p className="text-gray-600 mt-2">{product.description || "No description available"}</p>
-                  <div className="flex items-center justify-between mt-4">
-                    <span className="text-lg font-bold text-blue-600">{product.price}</span>
-                    <div className="flex items-center space-x-2">
-                      <button onClick={() => handleQuantityChange(product.id, -1)} className="px-2 py-1 bg-gray-200 rounded">-</button>
-                      <span>{quantities[product.id] || 0}</span>
-                      <button onClick={() => handleQuantityChange(product.id, 1)} className="px-2 py-1 bg-gray-200 rounded">+</button>
+                <div className="p-5">
+                  <h3 className="text-xl font-semibold text-gray-800 mb-2">{product.name}</h3>
+                  <p className="text-gray-600 mb-4 line-clamp-2">
+                    {product.description || "High-quality product for your pet"}
+                  </p>
+                  
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-lg font-bold text-orange-600">
+                      {product.price}
+                    </span>
+                    
+                    <div className="flex items-center border border-gray-200 rounded-lg overflow-hidden">
+                      <button 
+                        onClick={() => handleQuantityChange(product.id, -1)}
+                        className="px-3 py-1 bg-gray-100 hover:bg-gray-200 transition-colors"
+                        disabled={quantities[product.id] <= 0}
+                      >
+                        <FaMinus className="text-xs" />
+                      </button>
+                      <span className="px-3 py-1 w-8 text-center">
+                        {quantities[product.id] || 0}
+                      </span>
+                      <button 
+                        onClick={() => handleQuantityChange(product.id, 1)}
+                        className="px-3 py-1 bg-gray-100 hover:bg-gray-200 transition-colors"
+                      >
+                        <FaPlus className="text-xs" />
+                      </button>
                     </div>
                   </div>
+                  
                   <button
                     onClick={() => handleAddToCart(product)}
-                    className="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-200 flex justify-center items-center"
+                    disabled={quantities[product.id] <= 0}
+                    className={`w-full py-2 px-4 rounded-lg font-medium transition-colors flex items-center justify-center ${
+                      quantities[product.id] > 0 
+                        ? 'bg-orange-500 hover:bg-orange-600 text-white'
+                        : 'bg-gray-200 text-gray-500 cursor-not-allowed'
+                    }`}
                   >
-                    <FaShoppingCart className="mr-2" /> Add to Panier
+                    <FaShoppingCart className="mr-2" />
+                    Add to Cart
                   </button>
-                  {notificationId === product.id && (
-                    <div className="mt-2 text-sm text-green-700 bg-green-100 px-3 py-1 rounded">
-                      {product.name} ajouté au panier !
-                    </div>
-                  )}
                 </div>
               </div>
             ))
           ) : (
-            <p className="text-center text-gray-600">No products found. Please try a different search.</p>
+            <div className="col-span-full text-center py-12">
+              <div className="text-gray-400 text-5xl mb-4">😕</div>
+              <h3 className="text-xl font-semibold text-gray-700 mb-2">No products found</h3>
+              <p className="text-gray-500">
+                We couldn't find any products matching "{searchQuery}"
+              </p>
+              <button
+                onClick={() => setSearchQuery('')}
+                className="mt-4 px-6 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors"
+              >
+                Clear Search
+              </button>
+            </div>
           )}
         </div>
       </div>
+
+      {/* Notification */}
+      {notification && (
+        <div className="fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg animate-fade-in-up">
+          <div className="flex items-center">
+            <FaShoppingCart className="mr-2" />
+            <span>
+              Added {notification.quantity} {notification.quantity > 1 ? 'items' : 'item'} of {notification.name} to cart
+            </span>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
