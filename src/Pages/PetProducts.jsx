@@ -104,16 +104,16 @@ const PetProducts = () => {
   }
 
   return (
-    <div className="bg-gray-50 min-h-screen py-8">
+    <div className="bg-gray-50 min-h-screen py-3">
       {/* Hero Banner */}
-      <div className="relative bg-cover bg-center h-64 rounded-xl shadow-lg mb-12 mx-4 sm:mx-6 lg:mx-8" 
-           style={{ backgroundImage: 'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("/images/backgs.webp")' }}>
+      <div className="relative bg-cover bg-center h-90 rounded-xl shadow-lg mb-8 mx-4 sm:mx-6 lg:mx-8" 
+           style={{ backgroundImage: 'url("/images/backgs.webp")' }}>
         <div className="absolute inset-0 flex items-center justify-center text-center px-4">
           <div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
               Premium Products for Your Pets
             </h2>
-            <p className="text-lg sm:text-xl text-white max-w-2xl mx-auto">
+            <p className="text-lg sm:text-xl text-white max-w-2xl mx-auto mb-50">
               Everything you need to keep your furry friends happy and healthy
             </p>
           </div>

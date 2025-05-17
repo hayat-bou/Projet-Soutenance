@@ -6,12 +6,12 @@ import PetProducts from './Pages/PetProducts';
 import PetProfile from './Pages/PetProfile';
 import About from './Pages/About';
 import ContactUs from './Pages/ContactUs';
-import Admin from './Components/Admin';
 import FormData from './Components/FormData';
 import AdoptForm from './Pages/AdoptForm';
 import Favorites from './Pages/favorites';
 import NotFound from './Pages/notFound';
 import { FaPaw, FaTimes, FaBars, FaShoppingCart, FaUser } from 'react-icons/fa';
+import Dashboard from './Components/Dashboard';
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -207,7 +207,7 @@ function App() {
           <Route path="/petproducts/:id" element={<PetProducts />} />
           <Route path="/about" element={<About />} />
           <Route path="/contactus" element={<ContactUs />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/formdata" element={<FormData />} />
           <Route path="/adoptform/:id" element={<AdoptForm />} />
           <Route path="/favorites" element={<Favorites />} />
